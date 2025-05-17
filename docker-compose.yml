@@ -6,7 +6,8 @@ services:
       POSTGRES_USER: postgres # Demo credentials for local dev purposes
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: polling_db
-
+    ports:
+      - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
 

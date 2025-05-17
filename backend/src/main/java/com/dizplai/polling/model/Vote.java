@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -14,10 +15,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor // JPA requires a no-args constructor
 @Data
 public class Vote {
     
-    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Long id;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
     
     @ManyToOne
     private Poll poll;

@@ -14,19 +14,21 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
+@NoArgsConstructor // JPA requires a no-args constructor
 @Data
 @Entity
 public class Poll {
     
-    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Long id;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
     
+    private String question;
+
     @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL)
     private List<Option> options; 
     /* TODO: Validate 2-7 options */
-
-    private String question;
     
     @CreationTimestamp
     private Date createdAt;

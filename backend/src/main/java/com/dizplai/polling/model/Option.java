@@ -8,6 +8,7 @@ import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor 
 public class Option {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     private String shortName;
@@ -23,5 +24,11 @@ public class Option {
     private int voteCount;
     
     @ManyToOne
+    @ToString.Exclude // avoid infinite recursion
     private Poll poll;
+
+    @ToString.Include(name = "poll")
+    private String pollToString() {
+        return poll == null || poll.getId() == null ? "null" : poll.getId().toString();
+    }
 }
