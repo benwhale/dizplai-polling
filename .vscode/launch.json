@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-BackendApplication<polling>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.dizplai.polling.BackendApplication",
+      "projectName": "polling",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
