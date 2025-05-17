@@ -40,7 +40,10 @@ Minimal CI using GitHub actions to build and test
 
 ## Workflow / Worklog
 
-* High level planning, tech stack
-* Initialised Spring Boot backend app (Spring Boot initializer) and React frontend app (create-react-app)
-* Set-up basic CI pipeline in GitHub Repo
-* Installed Postgres
+- High level planning, tech stack
+- Initialised Spring Boot backend app (Spring Boot initializer) and React frontend app (create-react-app)
+- Set-up basic CI pipeline in GitHub Repo
+- Installed Postgres
+- Created spring application structure
+- Created end to end poll creation flow - possibly overdid the DTOs
+- CI is now failing as the test is trying to connect to the database, so will resolve that next - possibly a good time to use H2 locally?
