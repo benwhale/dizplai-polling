@@ -40,5 +40,30 @@ public class PollService {
         return pollRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Poll not found"));
     }
+
+    public Poll activatePoll(Long id) {
+        // Only one poll can be active at a time, so we need to deactivate the current active poll
+        Poll currentActivePoll = getActivePoll();
+        if (currentActivePoll != null) {
+            deactivatePoll(currentActivePoll);
+        }
+        Poll poll = getPollById(id);
+        poll.setActive(true);
+        return pollRepository.save(poll);
+    }
+
+    public Poll deactivatePollById(Long id) {
+        Poll poll = getPollById(id);
+        return deactivatePoll(poll);
+    }
+
+    private Poll deactivatePoll(Poll poll) {
+        poll.setActive(false);
+        return pollRepository.save(poll);
+    }
+
+    public Poll getActivePoll() {
+        return pollRepository.findByActiveTrue().orElse(null);
+    }
     
 }

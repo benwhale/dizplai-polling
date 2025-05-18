@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 public class OptionResponseDTO {
     
     private Long id;
-    private String shortName;
-    private String longName;
+    private String name;
     private Long voteCount;
 } 

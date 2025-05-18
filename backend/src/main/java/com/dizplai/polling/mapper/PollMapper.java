@@ -13,6 +13,7 @@ public interface PollMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "active", ignore = true)
     Poll toPoll(PollCreationDTO request);
     
     @Mapping(target = "id", source = "id") // explicitly set the id

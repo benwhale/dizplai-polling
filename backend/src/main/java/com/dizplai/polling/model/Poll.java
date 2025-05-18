@@ -23,6 +23,8 @@ import lombok.NoArgsConstructor;
 public class Poll {
     
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+
+    private boolean active = false;
     
     private String question;
 

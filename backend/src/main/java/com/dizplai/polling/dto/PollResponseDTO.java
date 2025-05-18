@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PollResponseDTO {
     private Long id;
+    private boolean active;
     private String question;
     private List<OptionResponseDTO> options;
     private LocalDateTime createdAt; 

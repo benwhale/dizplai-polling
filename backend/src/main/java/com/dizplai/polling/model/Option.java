@@ -18,9 +18,7 @@ public class Option {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    private String shortName;
-    private String longName;
+    private String name;
     private int voteCount;
     
     @ManyToOne

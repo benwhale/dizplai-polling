@@ -14,9 +14,6 @@ import lombok.NoArgsConstructor;
 public class OptionCreationDTO {
     
     @NotBlank(message = "Option text is required")
-    private String shortName;
-
-    @NotBlank(message = "Option text is required")
-    private String longName;
+    private String name;
 
 }

@@ -17,7 +17,7 @@ public interface VoteMapper {
     @Mapping(target = "option", ignore = true)
     Vote toVote(VoteCreationDTO request);
     
-    @Mapping(target = "optionShortName", source = "option.shortName")
+    @Mapping(target = "optionName", source = "option.name")
     VoteResponseDTO toVoteResponse(Vote vote);
     
     List<VoteResponseDTO> toVoteResponses(List<Vote> votes);

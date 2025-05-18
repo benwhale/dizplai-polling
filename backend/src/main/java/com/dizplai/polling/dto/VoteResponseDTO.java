@@ -12,8 +12,7 @@ import lombok.NoArgsConstructor;
 public class VoteResponseDTO {
     
     private Long id;
-    private String optionShortName;
-    private String optionLongName;
+    private String optionName;
     private LocalDateTime createdAt;
 
 }
