@@ -44,6 +44,10 @@ If we were needing massive scale then it might make sense to have gone for a NoS
 I think the immediate next step I would do with this application is add a Redis layer for quick vote tallying.
 I'd probably look to increment counts in Redis and store the full records in Postgres. Could put a queue between the API event and the DB calls to protect it from demand surges.
 
+### Race conditions
+
+Utilising atomic operation to increment vote counts to try and handle concurent voting.
+
 ### CI/CD
 
 Minimal CI using GitHub actions to build and test

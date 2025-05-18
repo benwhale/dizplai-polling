@@ -68,6 +68,7 @@ public class VoteController {
      */
     @PostMapping("/")
     public VoteResponseDTO vote(@RequestBody VoteCreationDTO voteCreationDTO) {
+        // At the moment the UI will have to do a second request to get the updated vote count. TODO consider requesting the updated poll after voting.
         return voteMapper.toVoteResponse(voteService.vote(voteCreationDTO));
     }
 }

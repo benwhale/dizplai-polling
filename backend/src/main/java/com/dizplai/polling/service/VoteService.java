@@ -71,12 +71,12 @@ public class VoteService {
         Vote vote = new Vote();
         vote.setOption(option);
         vote.setPoll(activePoll);
-        
+
+        // Save the vote
         Vote savedVote = voteRepository.save(vote);
 
-        //Increment the vote count for the option
-        option.setVoteCount(option.getVoteCount() + 1);
-        optionRepository.save(option);
+        // Atomically increment the vote count for the option to avoid race conditions
+        optionRepository.incrementVoteCount(option.getId());
 
         return savedVote;
 
