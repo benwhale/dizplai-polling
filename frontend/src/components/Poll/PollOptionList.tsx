@@ -1,0 +1,46 @@
+import React, { useState } from "react";
+import { PollOption } from "../../types/poll";
+import PollOptionButton from "./PollOptionButton";
+import PollResults from "./PollResults";
+import { pollService } from "../../services/pollService";
+
+export default function PollOptionList(
+  props: Readonly<{ options: PollOption[] }>
+) {
+  // Get whether the user has voted from state
+  const [hasVoted, setHasVoted] = useState(false);
+  const [isVoting, setIsVoting] = useState(false);
+
+  const handleVote = async (optionId: number) => {
+    if (hasVoted || isVoting) return;
+
+    setIsVoting(true);
+    try {
+      await pollService.submitVote({ optionId: optionId });
+      setHasVoted(true);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsVoting(false);
+    }
+  };
+
+  return (
+    <div>
+      {props.options.map((option) => {
+        if (!hasVoted) {
+          return (
+            <PollOptionButton
+              key={option.id}
+              option={option}
+              handleVote={handleVote}
+              isVoting={isVoting}
+            />
+          );
+        } else {
+          return <PollResults key={option.id} option={option} />;
+        }
+      })}
+    </div>
+  );
+}
