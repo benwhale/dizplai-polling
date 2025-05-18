@@ -4,6 +4,8 @@ Dizplai Technical Test
 
 ## Installation
 
+- Requires Docker (testcontainers)
+
 ### Backend
 
 The backend utilises Java 21 and Spring Boot built with Maven
@@ -33,6 +35,14 @@ Selected Maven over Gradle as it is what I am currently most familiar with.
 ### Postgres
 
 Running a local Postgres
+
+### Scaling considerations
+
+Given we need to store information about the votes cast (time but I could imagine wanting IP Address etc), Postgres felt like a decent choice.
+If we were needing massive scale then it might make sense to have gone for a NoSQL Cassandra/Mongo/DynamoDB etc approach.
+
+I think the immediate next step I would do with this application is add a Redis layer for quick vote tallying.
+I'd probably look to increment counts in Redis and store the full records in Postgres. Could put a queue between the API event and the DB calls to protect it from demand surges.
 
 ### CI/CD
 
