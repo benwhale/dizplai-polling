@@ -77,7 +77,7 @@ public class VoteService {
 
         // Atomically increment the vote count for the option to avoid race conditions
         optionRepository.incrementVoteCount(option.getId());
-
+        
         return savedVote;
 
     }

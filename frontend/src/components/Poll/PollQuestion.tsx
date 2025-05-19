@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function PollQuestion(props: { question: string }) {
-  return <div>{props.question}</div>;
+export default function PollQuestion(props: Readonly<{ question: string }>) {
+  return <h1 className="poll-question">{props.question}</h1>;
 }

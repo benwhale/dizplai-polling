@@ -16,10 +16,10 @@ export default function Home() {
   }, []);
 
   if (!poll) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
   } else {
     return (
-      <div>
+      <div className="poll-container">
         <PollQuestion question={poll.question} />
         <PollOptionList options={poll.options} />
       </div>

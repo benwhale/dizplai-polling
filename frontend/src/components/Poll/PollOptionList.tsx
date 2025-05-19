@@ -25,6 +25,11 @@ export default function PollOptionList(
     }
   };
 
+  const totalVotes = props.options.reduce(
+    (sum, option) => sum + option.voteCount,
+    0
+  );
+
   return (
     <div>
       {props.options.map((option) => {
@@ -38,7 +43,13 @@ export default function PollOptionList(
             />
           );
         } else {
-          return <PollResults key={option.id} option={option} />;
+          return (
+            <PollResults
+              key={option.id}
+              option={option}
+              totalVotes={totalVotes}
+            />
+          );
         }
       })}
     </div>

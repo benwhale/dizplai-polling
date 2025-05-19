@@ -8,10 +8,153 @@
   justify-content: flex-start;
   font-size: calc(10px + 2vmin);
   color: white;
+  background-image: url("../public/background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .App-logo {
   height: 6vmin;
   pointer-events: none;
   margin-top: 20px;
+  max-width: 100%;
+}
+
+.PollOptionButton {
+  margin: 0 100px;
+}
+
+.button {
+  background-color: rgba(209, 128, 245, 0.3);
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 25px;
+  margin: 50px 0;
+  color: white;
+  font-size: 36px;
+  cursor: pointer;
+  width: 100%;
+  display: block;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.button:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.button:disabled {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.poll-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.poll-question {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.5em;
+  word-wrap: break-word;
+}
+
+.result {
+  background-color: rgba(209, 128, 245, 0.3);
+  border: 2px solid white;
+  border-radius: 5px;
+  padding: 25px;
+  margin: 50px 0;
+  color: white;
+  font-size: 36px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.result-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: rgba(209, 128, 245, 1);
+  transition: width 0.3s ease-in-out;
+}
+
+.result-text {
+  position: relative;
+  z-index: 1;
+  word-wrap: break-word;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.result-name {
+  flex: 1;
+  text-align: center;
+}
+
+.result-percentage {
+  min-width: 60px;
+  text-align: right;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .App {
+    font-size: calc(8px + 2vmin);
+    padding: 10px;
+  }
+
+  .poll-container {
+    padding: 0 10px;
+  }
+
+  .poll-question {
+    font-size: 1.2em;
+  }
+
+  .button,
+  .result {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .App {
+    font-size: calc(6px + 2vmin);
+    padding: 5px;
+  }
+
+  .poll-container {
+    padding: 0 5px;
+  }
+
+  .poll-question {
+    font-size: 1em;
+  }
+
+  .button,
+  .result {
+    padding: 10px;
+    font-size: 12px;
+  }
+}
+
+/* Loading state */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  font-size: 1.2em;
 }

@@ -12,6 +12,7 @@ export default function PollOptionButton(
     <button
       onClick={() => props.handleVote(props.option.id)}
       disabled={props.isVoting}
+      className="button"
     >
       {props.option.name}
     </button>
