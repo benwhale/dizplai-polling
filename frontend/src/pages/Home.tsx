@@ -15,13 +15,20 @@ export default function Home() {
     fetchPoll();
   }, []);
 
+  const handlePollUpdate = (poll: Poll) => {
+    setPoll(poll);
+  };
+
   if (!poll) {
     return <div className="loading">Loading...</div>;
   } else {
     return (
       <div className="poll-container">
         <PollQuestion question={poll.question} />
-        <PollOptionList options={poll.options} />
+        <PollOptionList
+          options={poll.options}
+          onPollUpdate={handlePollUpdate}
+        />
       </div>
     );
   }

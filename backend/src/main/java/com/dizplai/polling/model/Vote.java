@@ -8,16 +8,14 @@ import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.Date;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor // JPA requires a no-args constructor
 @Data
-public class Vote {
+@EqualsAndHashCode(callSuper = true)
+public class Vote extends BaseEntity {
     
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
     
@@ -26,12 +24,6 @@ public class Vote {
     
     @ManyToOne
     private Option option;
-
-    @CreationTimestamp
-    private Date createdAt; // TODO split into abstract class
-    
-    @UpdateTimestamp
-    private Date updatedAt;
 
     /* TODO I'd love to put IP Address here as a basic way of monitoring where the votes are coming from */
 

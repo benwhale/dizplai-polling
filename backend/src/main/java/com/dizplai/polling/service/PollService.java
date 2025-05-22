@@ -13,9 +13,7 @@ public class PollService {
 
     private static final Logger logger = LoggerFactory.getLogger(PollService.class);
 
-
     private final PollRepository pollRepository;    
-
 
     public PollService(PollRepository pollRepository) {
         this.pollRepository = pollRepository;

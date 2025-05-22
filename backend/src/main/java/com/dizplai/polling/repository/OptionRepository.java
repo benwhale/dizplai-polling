@@ -14,7 +14,7 @@ public interface OptionRepository extends JpaRepository<Option, Long> {
      * Atomically increment the vote count for an option.
      * @param id The id of the option to increment the vote count for.
      */
-    @Modifying
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Query("UPDATE Option o SET o.voteCount = o.voteCount + 1 WHERE o.id = :id")
     void incrementVoteCount(@Param("id") Long id);
 

@@ -11,7 +11,7 @@ import com.dizplai.polling.dto.VoteCreationDTO;
 import com.dizplai.polling.dto.VoteResponseDTO;
 import com.dizplai.polling.service.VoteService;
 import com.dizplai.polling.mapper.VoteMapper;
-import com.dizplai.polling.model.Vote;
+import com.dizplai.polling.model.Poll;
 import com.dizplai.polling.mapper.PollMapper;
 import java.util.List;
 
@@ -25,11 +25,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequestMapping("/votes")
 public class VoteController {
 
-
     private final VoteService voteService;
     private final VoteMapper voteMapper;
     private final PollMapper pollMapper;        
-
 
     public VoteController(VoteService voteService, VoteMapper voteMapper, PollMapper pollMapper) {
         this.voteService = voteService;
@@ -69,14 +67,12 @@ public class VoteController {
 
     /**
      * Vote for the active poll
-     * @param voteCreationDTO DTO for the vote to create
+     * @param voteCreationDTO DTO for the vote to create    
+     * @return PollResponseDTO the updated poll
      */
     @PostMapping("/")
     public PollResponseDTO vote(@RequestBody VoteCreationDTO voteCreationDTO) {
-        // At the moment the UI will have to do a second request to get the updated vote count. TODO consider requesting the updated poll after voting.
-        // return voteMapper.toVoteResponse(voteService.vote(voteCreationDTO));
-        Vote castVote = voteService.vote(voteCreationDTO);
-        return pollMapper.toPollResponse(castVote.getPoll());
-    
+        Poll updatedPoll = voteService.vote(voteCreationDTO);
+        return pollMapper.toPollResponse(updatedPoll);
     }
 }

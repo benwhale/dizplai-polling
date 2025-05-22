@@ -14,13 +14,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor // JPA requires a no-args constructor
 @Data
 @Entity
-public class Poll {
+@EqualsAndHashCode(callSuper = true)
+public class Poll extends BaseEntity {
     
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 
@@ -30,12 +32,5 @@ public class Poll {
 
     @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL)
     private List<Option> options; 
-    /* TODO: Validate 2-7 options */
-    
-    @CreationTimestamp
-    private Date createdAt;
-    
-    @UpdateTimestamp
-    private Date updatedAt;
     
 }

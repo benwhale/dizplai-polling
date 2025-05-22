@@ -24,9 +24,12 @@ export const pollService = {
   /**
    * Submit a vote for the active poll
    */
-  submitVote: async (voteData: VoteCreationDTO): Promise<VoteResponseDTO> => {
+  submitVote: async (voteData: VoteCreationDTO): Promise<PollResponseDTO> => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/votes/`, voteData);
+      const response = await axios.post<PollResponseDTO>(
+        `${API_BASE_URL}/votes/`,
+        voteData
+      );
       return response.data;
     } catch (error) {
       console.error("Error submitting vote:", error);

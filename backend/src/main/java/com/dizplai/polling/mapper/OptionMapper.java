@@ -11,8 +11,10 @@ import java.util.List;
 public interface OptionMapper {
     
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "voteCount", constant = "0")
+    @Mapping(target = "voteCount", constant = "0L")
     @Mapping(target = "poll", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
     Option toOption(OptionCreationDTO request);
     
     OptionResponseDTO toOptionResponse(Option option);

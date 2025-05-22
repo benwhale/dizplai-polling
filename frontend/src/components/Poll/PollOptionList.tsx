@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { PollOption } from "../../types/poll";
+import { PollOption, Poll } from "../../types/poll";
 import PollOptionButton from "./PollOptionButton";
 import PollResults from "./PollResults";
 import { pollService } from "../../services/pollService";
 
 export default function PollOptionList(
-  props: Readonly<{ options: PollOption[] }>
+  props: Readonly<{ options: PollOption[]; onPollUpdate: (poll: Poll) => void }>
 ) {
   // Get whether the user has voted from state
   const [hasVoted, setHasVoted] = useState(false);
@@ -16,7 +16,8 @@ export default function PollOptionList(
 
     setIsVoting(true);
     try {
-      await pollService.submitVote({ optionId: optionId });
+      const response = await pollService.submitVote({ optionId: optionId });
+      props.onPollUpdate(response);
       setHasVoted(true);
     } catch (error) {
       console.error(error);
