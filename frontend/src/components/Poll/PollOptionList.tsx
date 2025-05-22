@@ -10,13 +10,21 @@ export default function PollOptionList(
   // Get whether the user has voted from state
   const [hasVoted, setHasVoted] = useState(false);
   const [isVoting, setIsVoting] = useState(false);
+  const [selectedOptionId, setSelectedOptionId] = useState<number | null>(null);
 
-  const handleVote = async (optionId: number) => {
-    if (hasVoted || isVoting) return;
+  const handleSelect = (optionId: number) => {
+    setSelectedOptionId(optionId === selectedOptionId ? null : optionId);
+  };
+
+  const handleSubmit = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!selectedOptionId || hasVoted || isVoting) return;
 
     setIsVoting(true);
     try {
-      const response = await pollService.submitVote({ optionId: optionId });
+      const response = await pollService.submitVote({
+        optionId: selectedOptionId,
+      });
       props.onPollUpdate(response);
       setHasVoted(true);
     } catch (error) {
@@ -31,28 +39,40 @@ export default function PollOptionList(
     0
   );
 
+  if (hasVoted) {
+    return (
+      <div>
+        {props.options.map((option) => (
+          <PollResults
+            key={option.id}
+            option={option}
+            totalVotes={totalVotes}
+          />
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div>
-      {props.options.map((option) => {
-        if (!hasVoted) {
-          return (
-            <PollOptionButton
-              key={option.id}
-              option={option}
-              handleVote={handleVote}
-              isVoting={isVoting}
-            />
-          );
-        } else {
-          return (
-            <PollResults
-              key={option.id}
-              option={option}
-              totalVotes={totalVotes}
-            />
-          );
-        }
-      })}
+      <div className="options-container">
+        {props.options.map((option) => (
+          <PollOptionButton
+            key={option.id}
+            option={option}
+            isSelected={option.id === selectedOptionId}
+            onSelect={handleSelect}
+            isVoting={isVoting}
+          />
+        ))}
+      </div>
+      <button
+        onClick={handleSubmit}
+        disabled={!selectedOptionId || isVoting}
+        className="button submit-button"
+      >
+        {isVoting ? "Submitting..." : "Submit Vote"}
+      </button>
     </div>
   );
 }

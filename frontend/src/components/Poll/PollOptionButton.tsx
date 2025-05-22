@@ -4,15 +4,21 @@ import { PollOption } from "../../types/poll";
 export default function PollOptionButton(
   props: Readonly<{
     option: PollOption;
-    handleVote: (optionId: number) => void;
+    isSelected: boolean;
+    onSelect: (optionId: number) => void;
     isVoting: boolean;
   }>
 ) {
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    props.onSelect(props.option.id);
+  };
+
   return (
     <button
-      onClick={() => props.handleVote(props.option.id)}
+      onClick={handleClick}
       disabled={props.isVoting}
-      className="button"
+      className={`button ${props.isSelected ? "selected" : ""}`}
     >
       {props.option.name}
     </button>
