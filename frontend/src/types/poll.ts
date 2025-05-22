@@ -29,5 +29,3 @@ export interface Vote {
 export interface VoteCreationDTO {
   optionId: number;
 }
-
-export interface VoteResponseDTO extends Vote {}

@@ -2,7 +2,6 @@ import axios from "axios";
 import {
   PollResponseDTO,
   VoteCreationDTO,
-  VoteResponseDTO,
 } from "../types/poll";
 
 const API_BASE_URL = "http://localhost:8081"; // TODO move to env
