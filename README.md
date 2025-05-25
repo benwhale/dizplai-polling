@@ -1,10 +1,30 @@
 # dizplai-polling
 
-Dizplai Technical Test
+## Dizplai Technical Test
+
+This repository contains my solution to the Dizplai technical test [BRIEF.md](BRIEF.md)
+
+## Prerequisites
+
+- Java 21
+- Node.js [22.x, but CI runs against 18.x, 20.x, 22.x]
+- Docker
 
 ## Installation
 
-- Requires Docker (testcontainers)
+### Database
+
+This project uses Postgres 17.5, which is managed using docker compose.
+
+To stand it up, run the following in the root of the repository:
+
+```
+docker-compose up -d
+```
+
+This will stand up a Postgres instance on port 5432 and an Adminer instance on port 8080 in detached mode.
+
+Default development credentials are provided in the docker-compose.yml and application.json files for simplicity. These should never be committed to a 'real' repository
 
 ### Backend
 
@@ -13,13 +33,33 @@ The backend utilises Java 21 and Spring Boot built with Maven
 ```bash
 cd backend
 mvn clean install
+mvn spring-boot:run # Runs on port 8081
 ```
+
+API Documentation is provided using a Swagger/OpenAPI spec, which is exposed at: [/swagger-ui](localhost:8081/swagger-ui)
 
 ### Frontend
 
 ```bash
 cd frontend
 npm install
+npm start # Runs on port 3000
+```
+
+## Testing
+
+### Backend Tests
+
+```bash
+cd backend
+mvn test
+```
+
+### Frontend Tests
+
+```bash
+cd frontend
+npm test
 ```
 
 ## Assumptions and Decisions

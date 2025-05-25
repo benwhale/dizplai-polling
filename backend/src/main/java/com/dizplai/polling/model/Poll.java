@@ -1,10 +1,6 @@
 package com.dizplai.polling.model;
 
-import java.util.Date;
 import java.util.List;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -23,14 +19,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 public class Poll extends BaseEntity {
-    
+
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 
     private boolean active = false;
-    
+
     private String question;
 
     @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL)
-    private List<Option> options; 
-    
+    private List<Option> options;
+
 }

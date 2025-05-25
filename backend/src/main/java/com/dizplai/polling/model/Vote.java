@@ -16,15 +16,18 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class Vote extends BaseEntity {
-    
+
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
-    
+
     @ManyToOne
     private Poll poll;
-    
+
     @ManyToOne
     private Option option;
 
-    /* TODO I'd love to put IP Address here as a basic way of monitoring where the votes are coming from */
+    /*
+     * TODO I'd love to put IP Address here as a basic way of monitoring where the
+     * votes are coming from
+     */
 
 }

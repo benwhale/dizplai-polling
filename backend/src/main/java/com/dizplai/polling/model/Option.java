@@ -14,7 +14,7 @@ import lombok.ToString;
 @Entity
 @Data
 @AllArgsConstructor
-@NoArgsConstructor 
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Option extends BaseEntity {
     @Id
@@ -22,7 +22,7 @@ public class Option extends BaseEntity {
     private Long id;
     private String name;
     private Long voteCount;
-    
+
     @ManyToOne
     @ToString.Exclude // avoid infinite recursion
     private Poll poll;

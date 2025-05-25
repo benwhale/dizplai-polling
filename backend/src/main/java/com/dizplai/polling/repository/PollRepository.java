@@ -10,8 +10,8 @@ public interface PollRepository extends JpaRepository<Poll, Long> {
 
     /**
      * Get the active poll if it exists
+     * 
      * @return Optional<Poll>
      */
     Optional<Poll> findByActiveTrue();
 }
-

@@ -12,29 +12,28 @@ import org.junit.jupiter.api.Assertions;
 @Testcontainers
 class BackendApplicationTests {
 
-	
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:17.5")
             .withDatabaseName("polling_db_test")
             .withUsername("test")
             .withPassword("test");
 
-	static {
-		postgres.start();
-	}
+    static {
+        postgres.start();
+    }
 
     @DynamicPropertySource
     static void configureProperties(DynamicPropertyRegistry registry) {
         registry.add("spring.datasource.url", postgres::getJdbcUrl);
         registry.add("spring.datasource.username", postgres::getUsername);
         registry.add("spring.datasource.password", postgres::getPassword);
-		registry.add("spring.datasource.hikari.maximum-pool-size", () -> "5");
+        registry.add("spring.datasource.hikari.maximum-pool-size", () -> "5");
         registry.add("spring.datasource.hikari.minimum-idle", () -> "1");
         registry.add("spring.datasource.hikari.max-lifetime", () -> "20000"); // 20 seconds
     }
 
-	@Test
-	void contextLoads() {
-		Assertions.assertTrue(postgres.isRunning());
-	}
+    @Test
+    void contextLoads() {
+        Assertions.assertTrue(postgres.isRunning());
+    }
 
 }

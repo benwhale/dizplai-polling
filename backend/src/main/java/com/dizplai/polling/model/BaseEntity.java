@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public abstract class BaseEntity {
-    
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 

@@ -7,9 +7,10 @@ import com.dizplai.polling.model.Vote;
 import java.util.List;
 
 public interface VoteRepository extends JpaRepository<Vote, Long> {
-    
+
     /**
      * Find all votes for a specific poll
+     * 
      * @param pollId the ID of the poll
      * @return List of votes for the poll
      */
@@ -17,6 +18,7 @@ public interface VoteRepository extends JpaRepository<Vote, Long> {
 
     /**
      * Find all votes for a specific option
+     * 
      * @param optionId the ID of the option
      * @return List of votes for the option
      */
