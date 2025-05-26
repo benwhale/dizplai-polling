@@ -9,7 +9,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import jakarta.transaction.Transactional;
 
 @Service
 public class PollService {
@@ -27,6 +27,7 @@ public class PollService {
      * @param poll The poll to create
      * @return The created poll
      */
+    @Transactional
     public Poll createPoll(Poll poll) {
         logger.debug("Creating poll using object: {}", poll);        
         // Set the poll for each option. We've already validated that there are 2-7 options in the PollCreationDTO with jakarta
@@ -64,6 +65,7 @@ public class PollService {
      * @return The activated poll
      * @throws NoSuchElementException if the poll is not found
      */
+    @Transactional
     public Poll activatePoll(Long id) {
         // Only one poll can be active at a time, so we need to deactivate the current active poll
         Optional<Poll> currentActivePoll = pollRepository.findByActiveTrue();
