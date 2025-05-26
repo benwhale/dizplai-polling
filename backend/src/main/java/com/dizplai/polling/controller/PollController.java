@@ -16,6 +16,7 @@ import com.dizplai.polling.dto.PollCreationDTO;
 import com.dizplai.polling.dto.PollResponseDTO;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.Operation;
@@ -46,7 +47,7 @@ public class PollController {
     @ApiResponse(responseCode = "400", description = "Invalid request body", content = @Content)
     @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
     @PostMapping("/")
-    public PollResponseDTO createPoll(@RequestBody PollCreationDTO pollCreationDTO) {
+    public PollResponseDTO createPoll(@Valid @RequestBody PollCreationDTO pollCreationDTO) {
         Poll pollToCreate = pollMapper.toPoll(pollCreationDTO);
         Poll createdPoll = pollService.createPoll(pollToCreate);
         return pollMapper.toPollResponse(createdPoll);

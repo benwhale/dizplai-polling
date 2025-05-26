@@ -23,6 +23,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 /**
  * Controller for managing votes
@@ -90,7 +91,7 @@ public class VoteController {
     @ApiResponse(responseCode = "200", description = "Vote created successfully", content = @Content(schema = @Schema(implementation = PollResponseDTO.class)))
     @ApiResponse(responseCode = "404", description = "Poll not found", content = @Content)
     @PostMapping("/")
-    public PollResponseDTO vote(@RequestBody VoteCreationDTO voteCreationDTO) {
+    public PollResponseDTO vote(@RequestBody @Valid VoteCreationDTO voteCreationDTO) {
         Poll updatedPoll = voteService.vote(voteCreationDTO);
         return pollMapper.toPollResponse(updatedPoll);
     }

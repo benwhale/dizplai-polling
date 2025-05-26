@@ -7,7 +7,7 @@ This repository contains my solution to the Dizplai technical test [BRIEF.md](BR
 ## Prerequisites
 
 - Java 21
-- Node.js [22.x, but CI runs against 18.x, 20.x, 22.x]
+- Node.js 22.x
 - Docker
 
 ## Installation
@@ -55,6 +55,8 @@ cd backend
 mvn test
 ```
 
+I've provided an integration test for the vote flow (happy path) in `test/BackendApplicationTests.java` and unit tests for the vote service vote method in `test/services/VoteServiceTests.java`
+
 ### Frontend Tests
 
 ```bash
@@ -62,11 +64,13 @@ cd frontend
 npm test
 ```
 
+I've provided basic component tests for PollOptionButton in `src/components/Poll/PollOptionButton.spec.tsx` and for the service methods in `src/services/pollService.spec.ts`
+
 ## Assumptions and Decisions
 
 ### React application
 
-Selected create-react-app as I've used it before. Vite would have been another option and potentially good for this small-scale application, but I haven't used it yet, so wanted to save any learning curve.
+Selected create-react-app as a build tool as I've used it before. Vite would have been another option and potentially good for this small-scale application, but I haven't used it yet, so wanted to save any learning curve.
 
 ### Java build tool
 
