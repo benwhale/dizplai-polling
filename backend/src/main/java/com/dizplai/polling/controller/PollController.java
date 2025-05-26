@@ -106,7 +106,7 @@ public class PollController {
     }
 
     /**
-     * Deactivate a poll
+     * Deactivate a specific poll
      * 
      * @param pollId ID of the poll to deactivate
      * @return PollResponseDTO

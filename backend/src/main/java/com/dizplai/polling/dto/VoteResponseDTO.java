@@ -8,7 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  */
 @Schema(description = "Data Transfer object for returning a vote")
 public record VoteResponseDTO(
-        Long id,
+        @Schema(description = "The id of the vote", example = "1") Long id,
         @Schema(description = "The name of the option voted for", example = "Manchester United") String optionName,
         @Schema(description = "The date and time the vote was created", example = "2025-01-01T00:00:00Z") LocalDateTime createdAt) {
 }

@@ -4,6 +4,7 @@ import com.dizplai.polling.model.Poll;
 import com.dizplai.polling.repository.PollRepository;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
@@ -28,7 +29,7 @@ public class PollService {
      */
     public Poll createPoll(Poll poll) {
         logger.debug("Creating poll using object: {}", poll);        
-        // Set the poll for each option
+        // Set the poll for each option. We've already validated that there are 2-7 options in the PollCreationDTO with jakarta
         if (poll.getOptions() != null) {
             poll.getOptions().forEach(option -> option.setPoll(poll));
         }
@@ -65,9 +66,9 @@ public class PollService {
      */
     public Poll activatePoll(Long id) {
         // Only one poll can be active at a time, so we need to deactivate the current active poll
-        Poll currentActivePoll = getActivePoll();
-        if (currentActivePoll != null) {
-            deactivatePoll(currentActivePoll);
+        Optional<Poll> currentActivePoll = pollRepository.findByActiveTrue();
+        if (currentActivePoll.isPresent()) {
+            deactivatePoll(currentActivePoll.get());
         }
         Poll poll = getPollById(id);
         poll.setActive(true);

@@ -13,9 +13,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public abstract class BaseEntity {
 
+    /**
+     * The timestamp when the entity was created.
+     */
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    /**
+     * The timestamp when the entity was last updated.
+     */
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 }

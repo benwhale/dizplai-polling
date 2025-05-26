@@ -17,11 +17,20 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class Vote extends BaseEntity {
 
+    /**
+     * The id of the vote, used as the primary key.
+     */
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 
+    /**
+     * The poll that the vote belongs to.
+     */
     @ManyToOne
     private Poll poll;
 
+    /**
+     * The option that the vote belongs to.
+     */
     @ManyToOne
     private Option option;
 

@@ -20,12 +20,26 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class Poll extends BaseEntity {
 
+    /**
+     * The id of the poll, used as the primary key.
+     */
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 
+    /**
+     * Whether the poll is currently active.
+     */
     private boolean active = false;
 
+    /**
+     * The question of the poll.
+     */
     private String question;
 
+    /**
+     * The options of the poll. 
+     * This is a one-to-many relationship with the Option entity.
+     * The 2-7 option constraint is enforced by the DTOs
+     */
     @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL)
     private List<Option> options;
 

@@ -33,14 +33,28 @@ public class VoteService {
         this.pollRepository = pollRepository;
     }
 
+    /**
+     * Get all votes.
+     * @return the List of Votes
+     */
     public List<Vote> getAllVotes() {
         return voteRepository.findAll();
     }
 
+    /**
+     * Get all votes for a poll.
+     * @param pollId the ID of the poll
+     * @return the List of Votes
+     */
     public List<Vote> getAllVotesForPoll(Long pollId) {
         return voteRepository.findByPollId(pollId);
     }
 
+    /**
+     * Get all votes for an option.
+     * @param optionId the ID of the option
+     * @return the List of Votes
+     */
     public List<Vote> getAllVotesForOption(Long optionId) {
         return voteRepository.findByOptionId(optionId);
     }
