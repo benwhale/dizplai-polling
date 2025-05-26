@@ -12,12 +12,10 @@ export interface Poll {
   createdAt: string;
 }
 
-export interface PollCreationDTO {
+export interface PollCreation {
   question: string;
   options: string[];
 }
-
-export interface PollResponseDTO extends Poll {}
 
 export interface Vote {
   id: number;
@@ -26,6 +24,6 @@ export interface Vote {
   createdAt: string;
 }
 
-export interface VoteCreationDTO {
+export interface VoteCreation {
   optionId: number;
 }

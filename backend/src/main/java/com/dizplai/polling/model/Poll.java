@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -41,6 +42,7 @@ public class Poll extends BaseEntity {
      * The 2-7 option constraint is enforced by the DTOs
      */
     @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL)
+    @OrderBy("id ASC")
     private List<Option> options;
 
 }

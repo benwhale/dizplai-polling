@@ -1,16 +1,13 @@
 import axios from "axios";
-import {
-  PollResponseDTO,
-  VoteCreationDTO,
-} from "../types/poll";
+import { Poll, VoteCreation } from "../types/poll";
 
-const API_BASE_URL = "http://localhost:8081"; // TODO move to env
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export const pollService = {
   /**
    * Get the currently active poll
    */
-  getActivePoll: async (): Promise<PollResponseDTO> => {
+  getActivePoll: async (): Promise<Poll> => {
     try {
       const response = await axios.get(`${API_BASE_URL}/polls/active`);
       return response.data;
@@ -23,9 +20,9 @@ export const pollService = {
   /**
    * Submit a vote for the active poll
    */
-  submitVote: async (voteData: VoteCreationDTO): Promise<PollResponseDTO> => {
+  submitVote: async (voteData: VoteCreation): Promise<Poll> => {
     try {
-      const response = await axios.post<PollResponseDTO>(
+      const response = await axios.post<Poll>(
         `${API_BASE_URL}/votes/`,
         voteData
       );
