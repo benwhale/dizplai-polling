@@ -122,7 +122,7 @@ curl -X POST http://localhost:8081/polls/1/activate
 
 ## Assumptions and Decisions
 
-###React application
+### React application
 
 I'm most familiar with React, and selected create-react-app as a build tool as I've used it before. With hindsight, I think I should have chosen Vite as it is a more modern option and potentially better for this small-scale application, but I haven't used it yet, so wanted to save any learning curve.
 
