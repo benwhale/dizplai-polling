@@ -11,6 +11,7 @@ export default function PollOptionList(
   const [hasVoted, setHasVoted] = useState(false);
   const [isVoting, setIsVoting] = useState(false);
   const [selectedOptionId, setSelectedOptionId] = useState<number | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSelect = (optionId: number) => {
     setSelectedOptionId(optionId === selectedOptionId ? null : optionId);
@@ -21,6 +22,7 @@ export default function PollOptionList(
     if (!selectedOptionId || hasVoted || isVoting) return;
 
     setIsVoting(true);
+    setError(null);
     try {
       const response = await pollService.submitVote({
         optionId: selectedOptionId,
@@ -28,7 +30,8 @@ export default function PollOptionList(
       props.onPollUpdate(response);
       setHasVoted(true);
     } catch (error) {
-      console.error(error);
+      setError("Failed to submit vote. Please try again.");
+      console.error("Error submitting vote:", error);
     } finally {
       setIsVoting(false);
     }
@@ -73,6 +76,7 @@ export default function PollOptionList(
       >
         {isVoting ? "Submitting..." : "Submit Vote"}
       </button>
+      {error && <div className="error">{error}</div>}
     </div>
   );
 }

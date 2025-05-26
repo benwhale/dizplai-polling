@@ -6,11 +6,22 @@ import PollOptionList from "../components/Poll/PollOptionList";
 
 export default function Home() {
   const [poll, setPoll] = useState<Poll | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPoll = async () => {
-      const poll = await pollService.getActivePoll();
-      setPoll(poll);
+      try {
+        setIsLoading(true);
+        setError(null);
+        const poll = await pollService.getActivePoll();
+        setPoll(poll);
+      } catch (error) {
+        setError("Failed to load poll. Please try again.");
+        console.error("Error fetching poll:", error);
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchPoll();
   }, []);
@@ -19,9 +30,10 @@ export default function Home() {
     setPoll(poll);
   };
 
-  if (!poll) {
-    return <div className="loading">Loading...</div>;
-  } else {
+  if (isLoading) return <div className="loading">Loading...</div>;
+  else if (error) return <div className="error">{error}</div>;
+  else if (!poll) return <div className="error">No active poll found.</div>;
+  else {
     return (
       <div className="poll-container">
         <PollQuestion question={poll.question} />
